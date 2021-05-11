@@ -2,6 +2,7 @@ const express = require('express')
 require('./db/mongoose')
 const userRouter = require('./routers/user')
 const trackerRouter = require('./routers/tracker')
+// require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT 
