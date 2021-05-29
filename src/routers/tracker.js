@@ -74,7 +74,7 @@ router.get('/trackers/:id', auth, async (req, res) => {
 // Update tracker
 router.patch('/trackers/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['heightInMeters', 'weightInKg']
+    const allowedUpdates = ['heightInCm', 'weightInKg']
     const isValidOperation = updates.every((update) => allowedUpdates.includes((update)))
 
     if (!isValidOperation) {

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const trackerSchema = new mongoose.Schema({
-    heightInMeters: {
+    heightInCm: {
         type: Number,
         required: true,
         validate(value) {
