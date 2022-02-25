@@ -5,6 +5,7 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account')
 const router = new express.Router()
+const { userAllowedUpdates } = require('../utils/updates-utils')
 
 // Create User
 router.post('/users', async (req, res) => {
@@ -65,7 +66,7 @@ router.get('/users/me', auth, async (req, res) => {
 // Update user
 router.patch('/users/me', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'password', 'email', 'age', 'city']
+    const allowedUpdates = userAllowedUpdates
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {

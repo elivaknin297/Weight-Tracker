@@ -2,6 +2,7 @@ const express = require('express')
 const Tracker = require('../models/tracker')
 const auth = require('../middleware/auth')
 const router = new express.Router()
+const { trackerAllowedUpdates } = require('../utils/updates-utils')
 
 // Create tracker
 router.post('/trackers', auth, async (req, res) => {
@@ -74,7 +75,7 @@ router.get('/trackers/:id', auth, async (req, res) => {
 // Update tracker
 router.patch('/trackers/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['heightInCm', 'weightInKg']
+    const allowedUpdates = trackerAllowedUpdates
     const isValidOperation = updates.every((update) => allowedUpdates.includes((update)))
 
     if (!isValidOperation) {
