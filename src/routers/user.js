@@ -6,10 +6,12 @@ const auth = require('../middleware/auth')
 const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account')
 const router = new express.Router()
 const { userAllowedUpdates } = require('../utils/updates-utils')
+const { setExternalUID } = require('../utils/user-utils')
 
 // Create User
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
+    user.externalUID = setExternalUID()
 
     try {
         await user.save()
